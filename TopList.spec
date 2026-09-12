@@ -10,6 +10,7 @@ a = Analysis(
     binaries=[],
     datas=[
         ('web', 'web'),  # web/ 目录整体作为数据文件打入
+        ('template.md', '.'),  # 新增 TODO 的模板
     ],
     hiddenimports=[
         'webview.platforms.winforms',

@@ -3,6 +3,23 @@
 本项目所有重要变更都会记录在此文件中。
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [Unreleased]
+
+## [v1.1] - 2026-09-12
+
+### 新增
+
+- **子文件夹浏览**：侧栏支持进入子文件夹、返回上级，文件夹内所有层级的 md 清单都能管理
+- **编辑模式**：可直接增删改任务行（新增任务插入到当前组末尾），不用切换到外部编辑器
+- **撤销/重做**：编辑操作支持 Ctrl+Z / Ctrl+Y，每个文件独立保留 20 步快照
+- **文件管理**：侧栏文件右键菜单支持重命名、删除（移入回收站，可从回收站还原）、在资源管理器中定位
+- **模板新建 TODO**：以软件内置 `template.md` 为模板创建新待办文件，模板中 `{date}` 占位符自动替换为当天日期
+
+### 改进
+
+- 侧栏新增独立收起按钮，替代原「紧凑模式」按钮，展开/收起更直观
+- 任务行解析放宽：`- [x]` 后允许没有文字（可勾选空任务）
+
 ## [v1.0] - 2026-09-12
 
 首个正式版本。
@@ -19,5 +36,6 @@
 - **本地 HTTP JSON API**：前端与后端通过 `127.0.0.1` 随机端口通信，替代 pywebview js_api 桥，规避事件时序与死锁问题
 - **PyInstaller 打包配置**（`TopList.spec`），可打包为 Windows 单目录 exe
 
-[Unreleased]: https://github.com/ZJFERAL/TopList/compare/v1.0...HEAD
+[Unreleased]: https://github.com/ZJFERAL/TopList/compare/v1.1...HEAD
+[v1.1]: https://github.com/ZJFERAL/TopList/compare/v1.0...v1.1
 [v1.0]: https://github.com/ZJFERAL/TopList/releases/tag/v1.0

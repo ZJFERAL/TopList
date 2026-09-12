@@ -3,17 +3,18 @@ import re
 
 import yaml
 
-TASK_RE = re.compile(r'^(?P<indent>\s*)- \[(?P<mark>[ xX])\] (?P<text>.*)$')
+TASK_RE = re.compile(r'^(?P<indent>\s*)- \[(?P<mark>[ xX])\](?: (?P<text>.*))?$')
 HEADING_RE = re.compile(r'^(?P<level>#{1,6})\s+(?P<text>.*?)\s*$')
 FRONTMATTER_RE = re.compile(r'\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|$)', re.DOTALL)
 
 
 def parse_markdown(text: str) -> dict:
-    """返回 {'frontmatter': dict, 'groups': [{'title': str|None, 'items': [...]}]}。
+    """返回 {'frontmatter': dict, 'groups': [{'title': str|None, 'line': 行号|None, 'items': [...]}]}。
 
     item 两种：
       task:  {'type': 'task', 'line': 全文行号, 'indent': 缩进列数, 'checked': bool, 'text': str}
-      prose: {'type': 'prose', 'text': str}
+      prose: {'type': 'prose', 'line': 全文行号, 'text': str}
+    group.line 是标题行行号（无标题的首组为 None），供"组末尾新增"定位插入点。
     """
     frontmatter = {}
     body_offset = 0
@@ -31,12 +32,12 @@ def parse_markdown(text: str) -> dict:
     # 行号必须是全文行号，勾选写回时才能定位到正确的行
     line_base = text[:body_offset].count('\n')
 
-    groups = [{'title': None, 'items': []}]
+    groups = [{'title': None, 'line': None, 'items': []}]
     for i, raw in enumerate(body.split('\n')):
         no = line_base + i
         h = HEADING_RE.match(raw)
         if h:
-            groups.append({'title': h.group('text'), 'items': []})
+            groups.append({'title': h.group('text'), 'line': no, 'items': []})
             continue
         t = TASK_RE.match(raw.rstrip())
         if t:
@@ -45,10 +46,10 @@ def parse_markdown(text: str) -> dict:
                 'line': no,
                 'indent': len(t.group('indent').expandtabs(4)),
                 'checked': t.group('mark') != ' ',
-                'text': t.group('text').strip(),
+                'text': (t.group('text') or '').strip(),
             })
         elif raw.strip():
-            groups[-1]['items'].append({'type': 'prose', 'text': raw.rstrip()})
+            groups[-1]['items'].append({'type': 'prose', 'line': no, 'text': raw.rstrip()})
 
     return {
         'frontmatter': frontmatter,

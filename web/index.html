@@ -10,8 +10,10 @@
   <header id="titlebar">
     <button id="folderBtn" class="icon-btn" title="打开文件夹">📁</button>
     <div id="folderName" title="">选择文件夹...</div>
-    <button id="compactBtn" class="icon-btn" title="紧凑模式(隐藏侧栏)">▤</button>
     <button id="pinBtn" class="icon-btn" title="窗口置顶">📌</button>
+    <button id="editBtn" class="icon-btn" title="编辑模式（增删改任务行）">✏️</button>
+    <button id="undoBtn" class="icon-btn" title="撤销 (Ctrl+Z)">↶</button>
+    <button id="redoBtn" class="icon-btn" title="恢复 (Ctrl+Y)">↷</button>
     <button id="minBtn" class="win-btn" title="最小化">─</button>
     <button id="maxBtn" class="win-btn" title="最大化">□</button>
     <button id="closeBtn" class="win-btn close" title="关闭">✕</button>
@@ -19,11 +21,14 @@
 
   <div id="layout">
     <nav id="fileList"></nav>
+    <button id="sidebarToggle" title="收起侧栏">‹</button>
     <main id="taskArea">
       <div id="meta"></div>
       <div id="tasks"></div>
     </main>
   </div>
+
+  <div id="fileMenu"></div>
 
   <div class="rz rz-n" data-edge="top"></div>
   <div class="rz rz-e" data-edge="right"></div>
