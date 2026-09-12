@@ -12,6 +12,7 @@
 - **多文件切换**：侧栏列出文件夹内的 `.md` 文件（按修改时间排序），支持进入子文件夹浏览
 - **编辑模式**：直接增删改任务行，支持撤销/重做（Ctrl+Z / Ctrl+Y，每文件独立 20 步）
 - **文件管理**：重命名、删除（移入回收站，可还原）、在资源管理器中定位、按模板新建 TODO
+- **自定义模板**：把 `template.md` 放在 `TopList.exe` 旁边即可覆盖内置模板，`{date}` 占位符自动替换为当天日期
 - **紧凑模式**：一键隐藏侧栏，只留任务区
 - **无边框窗口**：顶栏拖拽移动、八方向边缘缩放、最小化/最大化，窗口位置和大小会被记住
 - **编码兼容**：自动识别 UTF-8 / UTF-8 BOM / GBK，写回时保留原文件的 BOM 和换行风格
@@ -65,7 +66,7 @@ pyinstaller TopList.spec
 ├── mdparser.py    # Markdown 解析：frontmatter / 标题分组 / 任务行
 ├── watcher.py     # watchdog 监听文件夹（防抖回调）
 ├── web/           # 前端（原生 HTML/CSS/JS，无框架）
-├── template.md    # 新建 TODO 文件的默认模板
+├── template.md    # 新建 TODO 文件的默认模板（exe 旁可放同名文件覆盖）
 └── TopList.spec   # PyInstaller 打包配置
 ```
 
