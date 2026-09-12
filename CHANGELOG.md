@@ -1,0 +1,23 @@
+# 更新日志
+
+本项目所有重要变更都会记录在此文件中。
+格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
+
+## [v1.0] - 2026-09-12
+
+首个正式版本。
+
+### 新增
+
+- **置顶待办窗口**：常驻桌面、钉在所有窗口之上，可随时取消置顶
+- **Markdown 待办清单**：识别 `- [ ]` / `- [x]` 任务行，`#` 标题自动分组，支持 YAML frontmatter 元数据
+- **勾选写回**：在应用内勾选任务直接写回 `.md` 文件，保留原文件 BOM 与换行风格；自动识别 UTF-8 / UTF-8 BOM / GBK 编码
+- **外部修改自动刷新**：watchdog 监听文件夹（防抖），配合目录指纹轮询，在外部编辑器里改文件应用会自动同步
+- **多文件切换**：侧栏列出当前文件夹内所有 `.md` 文件（按修改时间排序，不递归子目录）
+- **紧凑模式**：一键隐藏侧栏，只留任务区
+- **无边框窗口**：顶栏拖拽移动、八方向边缘缩放、最小化/最大化；窗口位置与大小自动记忆
+- **本地 HTTP JSON API**：前端与后端通过 `127.0.0.1` 随机端口通信，替代 pywebview js_api 桥，规避事件时序与死锁问题
+- **PyInstaller 打包配置**（`TopList.spec`），可打包为 Windows 单目录 exe
+
+[Unreleased]: https://github.com/ZJFERAL/TopList/compare/v1.0...HEAD
+[v1.0]: https://github.com/ZJFERAL/TopList/releases/tag/v1.0
