@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopList</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="titlebar">
+    <button id="folderBtn" class="icon-btn" title="打开文件夹">📁</button>
+    <div id="folderName" title="">选择文件夹...</div>
+    <button id="compactBtn" class="icon-btn" title="紧凑模式(隐藏侧栏)">▤</button>
+    <button id="pinBtn" class="icon-btn" title="窗口置顶">📌</button>
+    <button id="minBtn" class="win-btn" title="最小化">─</button>
+    <button id="maxBtn" class="win-btn" title="最大化">□</button>
+    <button id="closeBtn" class="win-btn close" title="关闭">✕</button>
+  </header>
+
+  <div id="layout">
+    <nav id="fileList"></nav>
+    <main id="taskArea">
+      <div id="meta"></div>
+      <div id="tasks"></div>
+    </main>
+  </div>
+
+  <div class="rz rz-n" data-edge="top"></div>
+  <div class="rz rz-e" data-edge="right"></div>
+  <div class="rz rz-s" data-edge="bottom"></div>
+  <div class="rz rz-w" data-edge="left"></div>
+  <div class="rz rz-ne" data-edge="top-right"></div>
+  <div class="rz rz-se" data-edge="bottom-right"></div>
+  <div class="rz rz-sw" data-edge="bottom-left"></div>
+  <div class="rz rz-nw" data-edge="top-left"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

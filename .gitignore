@@ -1,0 +1,9 @@
+venv/
+build/
+dist/
+__pycache__/
+*.log
+*.pyc
+
+# 个人待办数据，不推送到远程
+2026-09 第二周.md
