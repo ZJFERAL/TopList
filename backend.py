@@ -260,8 +260,18 @@ class Api:
         subprocess.Popen(['explorer', '/select,', os.path.normpath(path)])
         return {'ok': True}
 
+    def _template_path(self):
+        """自定义模板查找顺序：打包版优先取 exe 旁边（用户可编辑、重打包不覆盖），
+        其次是打包时内置到 _internal 的兜底模板；源码运行取脚本目录。"""
+        if getattr(sys, 'frozen', False):
+            beside = os.path.join(os.path.dirname(sys.executable), 'template.md')
+            if os.path.isfile(beside):
+                return beside
+            return os.path.join(getattr(sys, '_MEIPASS', '.'), 'template.md')
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'template.md')
+
     def create_todo(self, name):
-        """以 template.md（软件目录下）为模板新建 TODO 文件；模板缺失时用内置默认。"""
+        """以 template.md 为模板新建 TODO 文件；模板缺失时用内置默认。"""
         new_name = self._safe_md_name(name)
         if not new_name:
             return {'ok': False, 'error': '文件名不合法'}
@@ -271,8 +281,7 @@ class Api:
         path = os.path.join(folder, new_name)
         if os.path.exists(path):
             return {'ok': False, 'error': '同名文件已存在'}
-        base = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-        tpl_path = os.path.join(base, 'template.md')
+        tpl_path = self._template_path()
         try:
             if os.path.isfile(tpl_path):
                 with open(tpl_path, 'r', encoding='utf-8') as f:
